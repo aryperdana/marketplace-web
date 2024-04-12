@@ -1,18 +1,18 @@
 'use client'
 import React, { useState } from "react";
-import { Banner } from "./components/Banner";
-import { Card } from "./components/Card";
-import { Footer } from "./components/Footer";
-import { Navbar } from "./components/Navbar";
-import { dummyData, Data } from './data'
-import Modal from "./components/Modal";
+import { Banner } from "../components/Banner";
+import { Card } from "../components/Card";
+import { Footer } from "../components/Footer";
+import { Navbar } from "../components/Navbar";
+import { menDatas, Data } from '../data'
+import Modal from "../components/Modal";
 import Image from "next/image";
-import image from '../public/image/shirt.jpg'
+import image from '../../public/image/shirt.jpg'
 
 
-const Home = () => {
+const Menwears = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const [searchResults, setSearchResults] = useState<Data[]>(dummyData);
+  const [searchResults, setSearchResults] = useState<Data[]>(menDatas);
 
   const [isOpen, setIsOpen] = useState(false)
   const [dataItem, setDataItem] =  useState<Data>({
@@ -38,14 +38,14 @@ const Home = () => {
     <main className="min-h-screen">
       <Navbar />
       <div className="px-10 pt-5">
-        <Banner searchTerm={searchTerm} setSearchTerm={setSearchTerm} setSearchResults={setSearchResults} searchResults={searchResults} image='url(image/banner.jpg)' />
+        <Banner searchTerm={searchTerm} setSearchTerm={setSearchTerm} setSearchResults={setSearchResults} searchResults={searchResults} image='url(image/men.jpg)' />
         <div className="my-8">
-          <div className="text-lg font-semibold">listed Recently</div>
+          <div className="text-lg font-semibold">listed Men Wears</div>
           <div className="grid lg:grid-cols-5 md:grid-cols-2 gap-8">
             {searchResults.slice(0, 10).map((val, ind) => 
               <>
                 <Card
-                  key={val?.id}
+                  key={val.id}
                   id={val?.id}
                   category={val?.category}
                   disc={val.disc}
@@ -80,4 +80,4 @@ const Home = () => {
   );
 }
 
-export default Home
+export default Menwears

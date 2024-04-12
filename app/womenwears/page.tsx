@@ -1,18 +1,18 @@
 'use client'
 import React, { useState } from "react";
-import { Banner } from "./components/Banner";
-import { Card } from "./components/Card";
-import { Footer } from "./components/Footer";
-import { Navbar } from "./components/Navbar";
-import { dummyData, Data } from './data'
-import Modal from "./components/Modal";
+import { Banner } from "../components/Banner";
+import { Card } from "../components/Card";
+import { Footer } from "../components/Footer";
+import { Navbar } from "../components/Navbar";
+import { womenDatas, Data } from '../data'
+import Modal from "../components/Modal";
 import Image from "next/image";
-import image from '../public/image/shirt.jpg'
+import image from '../../public/image/shirt.jpg'
 
 
-const Home = () => {
+const Womenwears = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const [searchResults, setSearchResults] = useState<Data[]>(dummyData);
+  const [searchResults, setSearchResults] = useState<Data[]>(womenDatas);
 
   const [isOpen, setIsOpen] = useState(false)
   const [dataItem, setDataItem] =  useState<Data>({
@@ -38,9 +38,9 @@ const Home = () => {
     <main className="min-h-screen">
       <Navbar />
       <div className="px-10 pt-5">
-        <Banner searchTerm={searchTerm} setSearchTerm={setSearchTerm} setSearchResults={setSearchResults} searchResults={searchResults} image='url(image/banner.jpg)' />
+        <Banner searchTerm={searchTerm} setSearchTerm={setSearchTerm} setSearchResults={setSearchResults} searchResults={searchResults} image='url(image/women.jpg)' />
         <div className="my-8">
-          <div className="text-lg font-semibold">listed Recently</div>
+          <div className="text-lg font-semibold">listed Women Wears</div>
           <div className="grid lg:grid-cols-5 md:grid-cols-2 gap-8">
             {searchResults.slice(0, 10).map((val, ind) => 
               <>
@@ -80,4 +80,4 @@ const Home = () => {
   );
 }
 
-export default Home
+export default Womenwears
