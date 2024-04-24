@@ -1,8 +1,6 @@
 'use client'
 
 import React from 'react'
-import Image from 'next/image'
-import foto from '../../public/image/banner.jpg'
 import { Data } from '../data'
 
 
@@ -19,10 +17,11 @@ export const Card: React.FC<CardProps> = ({ id, price, category, disc, image, na
       });
       return formatter.format(value);
     }
-  
+
+    
     return (
       <div className='h-70 min-w-full rounded-xl my-4 shadow-xl cursor-pointer' onClick={onClick}>
-        <Image src={image} alt='foto' className='w-full h-2/3 rounded-t-xl' />
+        <img src={image} alt='foto' className='w-full h-2/3 rounded-t-xl' />
         <div className='flex justify-between my-4 mx-3 text-sm'>
           <div>
             <div>{name}</div>
