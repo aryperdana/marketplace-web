@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
 import { IoArrowForward } from 'react-icons/io5';
 import axios from 'axios';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 interface BannerProps {
   searchTerm: string;
@@ -9,15 +10,19 @@ interface BannerProps {
 }
 
 export const Banner: React.FC<BannerProps> = ({ searchTerm, setSearchTerm }) => {
+  const [loadingBanner, setLoadingBanner] = useState<boolean>(false)
   const [banners, setBanners] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoadingBanner(true)
       try {
         const response = await axios.get('https://metaderma.bithouse.id/api/banner/?is_active=true');
         setBanners(response.data.detail);
+        setLoadingBanner(false)
       } catch (error) {
         console.error('Error fetching banner data:', error);
+        setLoadingBanner(false)
       }
     };
     fetchData();
@@ -25,8 +30,8 @@ export const Banner: React.FC<BannerProps> = ({ searchTerm, setSearchTerm }) => 
 
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const searchTerm = event.target.value;
-    setSearchTerm(searchTerm);
+    const q = event.target.value;
+    setSearchTerm(q);
   };
 
   const settings = {
@@ -40,7 +45,11 @@ export const Banner: React.FC<BannerProps> = ({ searchTerm, setSearchTerm }) => 
     arrows: false
   };
 
-  return (
+  return loadingBanner ?
+  <div className="flex items-center justify-center">
+    <AiOutlineLoading3Quarters className="animate-spin" style={{fontSize:50}} />
+  </div>
+   : (
     <div className="relative">
       <div className="slider-container h-10">
         <Slider {...settings}>
