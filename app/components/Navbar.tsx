@@ -19,6 +19,7 @@ export const Navbar = () => {
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [loginSubmiting, setLoginSubmiting] = useState<boolean>(false)
 
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
@@ -29,7 +30,7 @@ export const Navbar = () => {
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    setLoginSubmiting(true)
     try {
       const response = await fetch('https://metaderma.bithouse.id/api/auth/login/', {
         method: 'POST',
@@ -50,9 +51,11 @@ export const Navbar = () => {
 
       setIsLoggedIn(true);
       setModal(false);
+      setLoginSubmiting(false)
       router.push('/');
     } catch (error) {
       setError('Login failed. Please check your credentials.');
+      setLoginSubmiting(false)
     }
   };
 
@@ -119,8 +122,8 @@ export const Navbar = () => {
           <Link href="/registration" className="text-blue-400 text-sm">
             Don't have account?
           </Link>
-          <button type="submit" className="bg-black text-white py-2 px-4 rounded-md mt-6 w-full">
-            Login
+          <button type="submit" className="bg-black text-white py-2 px-4 rounded-md mt-6 w-full" disabled={loginSubmiting}>
+            {loginSubmiting ? 'Memuat...' : 'Login'}
           </button>
         </form>
       </Modal>

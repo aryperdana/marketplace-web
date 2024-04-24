@@ -1,11 +1,12 @@
 'use client'
 
 import React, { useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 const Confirmation: React.FC = () => {
   const searchParams = useSearchParams()
   const [otp, setOtp] = useState('');
+  
   
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -16,7 +17,7 @@ const Confirmation: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ code: otp, email: searchParams?.get('id') }),
+        body: JSON.stringify({ code: otp, email: searchParams?.get('prop') }),
       });
       if (response.ok) {
         console.log('OTP verification successful');

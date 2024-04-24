@@ -32,8 +32,7 @@ const Registration = () => {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-
-        router.push(`/confirmation/${formData?.email}`);
+        router.push(`/confirmation/?prop=${formData?.email}`);
       } else {
         console.error('Registration failed');
       }
